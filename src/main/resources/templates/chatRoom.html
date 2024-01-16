@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:object="${chatroom}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${chatroom.getName()}"></title>
+    <script th:src="@{/webjars/jquery/3.6.4/jquery.min.js}" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+    <!--<script th:src="@{static/js/stomp.js}"></script>-->
+</head>
+<body>
+<script>
+    const stompClient = new StompJs.Client({
+        brokerURL: 'ws://localhost:8080/messageIn/'+document.title
+    });
+
+    stompClient.activate();
+
+    stompClient.onConnect = () =>{
+        subscribe();
+    };
+    stompClient.onWebSocketError = (error) => {
+        console.error('Error with websocket', error);
+    };
+    stompClient.onStompError = (frame) => {
+        console.error('Broker reported error: ' + frame.headers['message']);
+        console.error('Additional details: ' + frame.body);
+    };
+    function send(){
+        let text = $('#input').val();
+        console.log("sending "+text+" to destination: /app/messageIn/"+document.title);
+        stompClient.publish({
+            destination: "/app/messageIn/"+document.title,
+            body: JSON.stringify(text)
+        });
+    }
+    function createListNode(messageObj){
+        console.log("messageObj: " + messageObj);
+        return "<tr><td>"+messageObj+"</tr></td><br>";
+    }
+    function showNewMessage(message){
+        console.log(message);
+        $("#messages").append(message);
+    }
+
+    function subscribe(){
+        console.log("subscribing to: /broadcast/"+document.title)
+        stompClient.subscribe('/broadcast/'+document.title, function(out){
+            var json = JSON.parse(out.body);
+            showNewMessage(createListNode("["+json.sender+"]: "+json.content))
+        });
+    }
+</script>
+    <tabel id="messages">
+        <thead></thead>
+        <tbody>
+            <tr th:each="msg, nr : ${chatroom.getMessageHistory()}">
+                <label th:text="${msg.toString()}"></label>
+            </tr>
+        </tbody>
+    </tabel>
+    <div>
+        <input type="text" id="input" value=""/>
+        <input type="button" value="send" onclick="send()">
+    </div>
+</body>
+</html>

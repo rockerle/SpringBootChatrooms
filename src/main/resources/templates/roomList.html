@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All available chat rooms</title>
+</head>
+<body>
+  <div align="center">
+    <form method="post" th:action="@{'/joinroom'}" th:object="${join}">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+      <label>
+        <select th:field="*{name}">
+          <option th:each="room : ${rooms}"
+                  th:value="${room.getName()}"
+                  th:text="${room.getName()}"></option>
+        </select>
+      </label>
+      <input type="submit" value="join">
+    </form>
+    <form method="get" th:action="@{'/createroom'}">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+      <label>
+        <input th:name="newRoomName" th:object="${newRoomName}" type="text">
+      </label>
+      <button type="submit" value="create">Create New Chatroom</button>
+    </form>
+  </div>
+</body>
+</html>

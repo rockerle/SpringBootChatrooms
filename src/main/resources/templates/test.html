@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:object="${test}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${test}"></title>
+</head>
+<body>
+<script th:src="@{/webjars/jquery/3.6.4/jquery.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+<script type="text/javascript">
+    const stompClient = new StompJs.Client({
+        brokerURL: 'ws://localhost:8080/test'
+    });
+
+    stompClient.debug = (log) =>{
+        console.log(log);
+    };
+
+    stompClient.activate();
+
+    stompClient.onConnect = () =>{
+        subscribe();
+    }
+
+    stompClient.onWebSocketError = (error) => {
+        console.error('Error with websocket', error);
+    };
+
+    stompClient.onStompError = (frame) => {
+        console.error('Broker reported error: ' + frame.headers['message']);
+        console.error('Additional details: ' + frame.body);
+    };
+    function send(){
+        let text = $("#text").val();
+        console.log("sending "+text);
+        $("#text").val = "";
+        // stompClient.send("/test/echo", {}, JSON.stringify(text));
+        stompClient.publish({
+            destination: "/app/test/messageIn",
+            body: JSON.stringify(text)
+        });
+    }
+    function createListNode(messageObj){
+        console.log("messageObj: " + messageObj);
+        return messageObj+"<br>";
+    }
+    function showNewMessage(message){
+        console.log(message);
+        $("#messages").append(message);
+    }
+
+    function subscribe(){
+        stompClient.subscribe('/broadcast/test', function(out){
+            var json = JSON.parse(out.body);
+            showNewMessage(createListNode("["+json.sender+"]: "+json.content))
+        });
+    }
+</script>
+<form>
+    <div id="messages">
+    </div>
+    <div>
+        <label><input type="text" id="text">test</label><br>
+        <input type="button" onclick="send()" value="send">
+    </div>
+</form>
+</body>
+</html>
