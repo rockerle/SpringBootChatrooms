@@ -1,5 +1,9 @@
 const stompClient = new StompJs.Client({
-    brokerURL: 'ws://localhost:8080/messageIn/'+document.title
+    brokerURL: 'ws://'+
+        ${@environment.getProperty('server.address')}+
+        +':'+
+        ${@environment.getProperty('server.port')}+
+            '/messageIn/'+document.title
 });
 stompClient.activate();
 
@@ -16,7 +20,7 @@ stompClient.onStompError = (frame) => {
 function send(room){
     let text = $('#input').val();
     console.log("sending "+text);
-    $('#input').val = "";
+    $('#input').value = "";
     stompClient.publish({
         destination: "/messageIn/"+room,
         body: JSON.stringify(text)
@@ -24,7 +28,7 @@ function send(room){
 }
 function createListNode(messageObj){
     console.log("messageObj: " + messageObj);
-    return messageObj+"<br>";
+    return messageObj;
 }
 function showNewMessage(message){
     console.log(message);

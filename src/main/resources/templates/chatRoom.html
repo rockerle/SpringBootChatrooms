@@ -50,14 +50,17 @@
         });
     }
 </script>
-    <tabel id="messages">
+    <form th:action="@{'/chat'}">
+        <button type="submit" th:action="@{'/chat'}" th:text="Back"></button><br>
+    </form>
+    <table id="messages">
         <thead></thead>
         <tbody>
             <tr th:each="msg, nr : ${chatroom.getMessageHistory()}">
-                <label th:text="${msg.toString()}"></label>
+                <td th:text="${msg.toString()}"></td>
             </tr>
         </tbody>
-    </tabel>
+    </table>
     <div>
         <input type="text" id="input" value=""/>
         <input type="button" value="send" onclick="send()">
