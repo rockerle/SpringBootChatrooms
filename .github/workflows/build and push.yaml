@@ -22,7 +22,13 @@ jobs:
           username: ${{secrets.DOCKER_NAME}}
           password: ${{secrets.DOCKER_TOKEN}}
 
-      - name: gradlew
+      - name: validate gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: make graldew executable
+        run: chmod +x ./gradlew
+
+      - name: gradlew build
         run: ./gradlew build
 
       - name: Build and Push
