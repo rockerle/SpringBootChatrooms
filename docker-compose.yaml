@@ -1,6 +1,8 @@
 services:
   sb-chatrooms:
     image: 'rockerle/springbootchatrooms:latest'
+    ports:
+        - 127.0.0.1:8080:8080/tcp
   mongodb:
     image: 'mongo:latest'
     environment:
