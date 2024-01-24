@@ -1,4 +1,6 @@
 services:
+  sb-chatrooms:
+    image: 'rockerle/springbootchatrooms:latest'
   mongodb:
     image: 'mongo:latest'
     environment:
@@ -7,3 +9,5 @@ services:
       - 'MONGO_INITDB_ROOT_USERNAME=root'
     ports:
       - '5000:27017'
+    links:
+      - sb-chatrooms
