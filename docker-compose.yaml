@@ -17,4 +17,4 @@ services:
     ports:
         - '127.0.0.1:8080:8080/tcp'
     depends_on:
-      - mongodb:mongo
+      - mongodb
