@@ -15,6 +15,6 @@ services:
     ports:
         - 127.0.0.1:8080:8080/tcp
     environment:
-        - 'MONGODB_URI=mongodb://mongodb'
+        - 'MONGODB_HOST=mongodb'
     depends_on:
         - mongodb
