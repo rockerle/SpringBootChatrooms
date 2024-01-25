@@ -40,22 +40,4 @@ public class AuthUserDetailsService implements UserDetailsService, UserDetailsPa
             throw new UsernameNotFoundException("User not found");
         return new AuthUser(user);
     }
-
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-//        http.authorizeHttpRequests(authRequest ->{
-//            authRequest.requestMatchers("/","/index","/register").permitAll()
-//                    .requestMatchers("/chat/**").authenticated()
-//                    .anyRequest().denyAll();
-//            })
-//                .formLogin(form ->
-//                        form.defaultSuccessUrl("/chat").failureForwardUrl("/login"))
-//                .logout(LogoutConfigurer::permitAll);
-//        return http.build();
-//    }
-//
-//    @Bean
-//    public PasswordEncoder getPasswordEncoder(){
-//        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-//    }
 }

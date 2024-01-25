@@ -10,12 +10,10 @@ import java.util.UUID;
 public class AuthUser implements UserDetails {
     private String name;
     private String password;
-//    private UUID uuid = UUID.randomUUID();
 
     public AuthUser(MongoUser u){
         this.name = u.getUsername();
         this.password = u.getPassword();
-//        this.uuid = u.getUuid();
     }
 
     public void setName(String name) {
@@ -60,16 +58,8 @@ public class AuthUser implements UserDetails {
         this.password = password;
     }
 
-//    public UUID getUuid() {
-//        return uuid;
-//    }
-//
-//    public void setUuid(UUID uuid) {
-//        this.uuid = uuid;
-//    }
-
     @Override
     public String toString(){
-        return this.name;// + "["+this.uuid.toString()+"]";
+        return this.name;
     }
 }

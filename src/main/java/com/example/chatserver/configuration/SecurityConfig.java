@@ -27,12 +27,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests(authRequest ->{
-//                    authRequest.requestMatchers("/","/index","/register","/test/**").permitAll()
-//                            .requestMatchers("/chat/**").authenticated()
-//                            .anyRequest().denyAll();
             authRequest.requestMatchers("/chat/**","/createroom", "/joinroom", "/messageIn/**","/broadcast/**").authenticated();
             authRequest.requestMatchers("/webjars/**","/static/**").authenticated();
-            authRequest.requestMatchers("/","index","register","/login").permitAll();
+            authRequest.requestMatchers("/","/index","/register","/login").permitAll();
                 })
                 .formLogin(form ->
                         form.defaultSuccessUrl("/chat").failureForwardUrl("/login"))

@@ -3,6 +3,7 @@ package com.example.chatserver.dto;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Document(collection="user")
@@ -44,5 +45,10 @@ public class MongoUser {
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public String toString(){
+        return "["+this.username+"]: "+ Arrays.toString(this.roles.toArray());
     }
 }
