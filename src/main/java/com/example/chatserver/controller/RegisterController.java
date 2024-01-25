@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
@@ -34,6 +35,7 @@ public class RegisterController {
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("user") MongoUser user){
         this.logger.info("registered user "+user.toString());
+        user.setRoles(List.of("USER"));
         if(us.addUser(user))
             return "index";
         else return "regFailed";

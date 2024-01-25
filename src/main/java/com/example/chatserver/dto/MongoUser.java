@@ -3,6 +3,7 @@ package com.example.chatserver.dto;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class MongoUser {
     private String id;
     private String username;
     private String password;
-    private List<String> roles;
+    private List<String> roles = new ArrayList<>();
 
     public String getUuid() {
         return id;
