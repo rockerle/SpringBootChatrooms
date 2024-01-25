@@ -1,9 +1,5 @@
 services:
-  sb-chatrooms:
-    container_name: chatrooms
-    image: 'rockerle/springbootchatrooms:latest'
-    ports:
-        - 127.0.0.1:8080:8080/tcp
+  
   mongodb:
     container_name: mongo
     image: 'mongo:latest'
@@ -12,5 +8,13 @@ services:
       - 'MONGO_INITDB_ROOT_PASSWORD=rootpassword'
     ports:
       - '5000:27017'
-    links:
-      - sb-chatrooms
+      
+  sb-chatrooms:
+    container_name: chatrooms
+    image: 'rockerle/springbootchatrooms:latest'
+    ports:
+        - 127.0.0.1:8080:8080/tcp
+    environment:
+        - 'MONGODB_URI=mongodb://mongodb'
+    depends_on:
+        - mongodb
