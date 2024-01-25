@@ -11,6 +11,6 @@ services:
       - 'MONGO_INITDB_ROOT_USERNAME=root'
       - 'MONGO_INITDB_ROOT_PASSWORD=rootpassword'
     ports:
-      - 'mongo:5000:27017'
+      - '5000:27017'
     links:
       - sb-chatrooms
