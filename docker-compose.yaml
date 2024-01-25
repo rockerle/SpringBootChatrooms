@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   
   mongodb:
@@ -13,8 +15,6 @@ services:
     container_name: chatrooms
     image: 'rockerle/springbootchatrooms:latest'
     ports:
-        - 127.0.0.1:8080:8080/tcp
-    environment:
-        - 'MONGODB_HOST=mongodb'
+        - '127.0.0.1:8080:8080/tcp'
     depends_on:
-        - mongodb
+      - mongodb:mongo
