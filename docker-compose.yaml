@@ -9,7 +9,7 @@ services:
       - 'MONGO_INITDB_ROOT_USERNAME=root'
       - 'MONGO_INITDB_ROOT_PASSWORD=rootpassword'
     ports:
-      - '5000:27017'
+      - '27017:27017'
       
   sb-chatrooms:
     container_name: 'chatrooms'
