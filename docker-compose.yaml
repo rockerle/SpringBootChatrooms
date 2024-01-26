@@ -3,7 +3,7 @@ version: '3.8'
 services:
   
   mongodb:
-    container_name: mongodb
+    container_name: 'mongodb'
     image: 'mongo:latest'
     environment:
       - 'MONGO_INITDB_ROOT_USERNAME=root'
@@ -12,7 +12,7 @@ services:
       - '5000:27017'
       
   sb-chatrooms:
-    container_name: chatrooms
+    container_name: 'chatrooms'
     image: 'rockerle/springbootchatrooms:latest'
     ports:
         - '127.0.0.1:8080:8080/tcp'
