@@ -15,8 +15,9 @@ services:
     container_name: 'chatrooms'
     image: 'rockerle/springbootchatrooms:latest'
     environment:
-      - 'MONGO_INITDB_ROOT_USERNAME=root'
-      - 'MONGO_INITDB_ROOT_PASSWORD=rootpassword'
+      - 'MONGODB_USER=root'
+      - 'MONGODB_PASSWORD=rootpassword'
+      - 'MONGODB_HOST=mongodb'
     ports:
         - '127.0.0.1:8080:8080/tcp'
     depends_on:
