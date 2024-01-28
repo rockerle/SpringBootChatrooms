@@ -47,4 +47,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: rockerle/springbootchatrooms:1.1
+          tags: rockerle/springbootchatrooms:1.2
