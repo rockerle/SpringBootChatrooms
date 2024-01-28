@@ -9,8 +9,9 @@
 </head>
 <body>
 <script>
+    let host = '${@environment.getProperty('server.address')}';
     const stompClient = new StompJs.Client({
-        brokerURL: 'ws://'+${@environment.getProperty('server.address')}+':8080/messageIn/'+document.title
+        brokerURL: 'ws://'+location.host+':8080/messageIn/'+document.title
     });
 
     stompClient.activate();
