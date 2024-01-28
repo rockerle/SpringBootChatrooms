@@ -1,6 +1,6 @@
 const stompClient = new StompJs.Client({
     brokerURL: 'ws://'+
-        +location.origin.replace("http://","")+':'+
+        +${@environment.getProperty('server.address')}+':'+
         ${@environment.getProperty('server.port')}+
             '/messageIn/'+document.title
 });
