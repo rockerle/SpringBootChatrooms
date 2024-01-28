@@ -10,7 +10,7 @@
 <body>
 <script>
     const stompClient = new StompJs.Client({
-        brokerURL: 'ws://localhost:8080/messageIn/'+document.title
+        brokerURL: 'ws://'+${@environment.getProperty('server.address')}+':8080/messageIn/'+document.title
     });
 
     stompClient.activate();
