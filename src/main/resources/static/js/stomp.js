@@ -1,6 +1,8 @@
+const socketHost = location.host;
+
 const stompClient = new StompJs.Client({
     brokerURL: 'ws://'+
-        location.host+
+        socketHost+
         +':'+
         ${@environment.getProperty('server.port')}+
             '/messageIn/'+document.title
