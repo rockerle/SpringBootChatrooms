@@ -31,27 +31,6 @@ public class ChatControler {
         this.crs = crs;
     }
 
-    @GetMapping("/test/index")
-    public String testSide(){
-        return "test";
-    }
-
-    @SubscribeMapping("/broadcast/test")
-    public void broadcastTest(){
-        System.out.println("Got a subscriber");
-    }
-
-    @MessageMapping("/test/messageIn")
-    @SendTo(value="/broadcast/test")
-    public ChatMessage test(@Payload String cm){
-        ChatMessage message = new ChatMessage();
-        message.setSender("TestUser");
-        message.setContent(cm);
-        this.logger.info("test endpoint was called");
-        this.logger.info(message.toString());
-        return message;
-    }
-
     @MessageMapping("/messageIn/{name}")
     @SendTo("/broadcast/{name}")
     public ChatMessage send(@DestinationVariable String name/*, @DestinationVariable String room*/, Authentication auth, String message) {
@@ -61,7 +40,6 @@ public class ChatControler {
         msg.setSender(auth.getName());
         msg.setContent(message);
         cr.getMessageHistory().add(msg);
-//        room = name;
         return msg;
     }
 
@@ -79,7 +57,6 @@ public class ChatControler {
     public String chatting(@PathVariable String room, Model model, Authentication authentication){
         this.logger.info("Called /chat/{name} with name="+room+" to join");
         ChatRoom chatroom = crs.getChatRoom(room);
-        //chatroom.join();
         model.addAttribute("chatroom", chatroom);
         return "chatRoom";
     }

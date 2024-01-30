@@ -27,13 +27,6 @@ public class ChatRoomService {
         return c;
     }
 
-    public void joinRoom(String name){
-        this.people.add(name);
-    }
-    public void leaveRoom(String name){
-        this.people.remove(name);
-    }
-
     public ChatRoom getChatRoom(String name){
         for(ChatRoom cr:chatRoomList){
             if(cr.getName().equals(name))

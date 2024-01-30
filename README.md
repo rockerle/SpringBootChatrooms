@@ -1,7 +1,10 @@
 <h1>Chatrooms With Spring Boot</h1>
 
-This is a little totaly barebone example project for a cloud computing college class
+This is a little totaly barebone example project for a cloud computing college class. 
+
 This App is using a MongoDB Container to save the registered users.
+
+Just use the docker-compose file from this repository to locally build the Chatserver and MongoDB containers.
 
 ![grafik](https://github.com/rockerle/SpringBootChatrooms/assets/16375280/637d462c-c317-48ef-955d-434766d8a8ae)
 ![grafik](https://github.com/rockerle/SpringBootChatrooms/assets/16375280/3b3e2bb4-a09f-4696-858b-7780cabc17a5)

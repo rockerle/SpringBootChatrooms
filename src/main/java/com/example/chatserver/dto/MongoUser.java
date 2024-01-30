@@ -16,10 +16,6 @@ public class MongoUser {
     private String password;
     private List<String> roles = new ArrayList<>();
 
-    public String getUuid() {
-        return id;
-    }
-
     public void setId(String id) {
         this.id = id;
     }

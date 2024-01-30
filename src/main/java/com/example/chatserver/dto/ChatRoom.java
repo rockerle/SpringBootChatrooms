@@ -6,7 +6,6 @@ import java.util.List;
 public class ChatRoom {
 
     private String name;
-    private List<String> people = new ArrayList<>();
     private List<ChatMessage> messageHistory = new ArrayList<>();
 
     public ChatRoom(){}

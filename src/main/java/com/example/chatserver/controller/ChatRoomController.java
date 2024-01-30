@@ -40,7 +40,6 @@ public class ChatRoomController {
     public String createRoom(@ModelAttribute("newRoomName") String name, Authentication auth, Model model){
         this.logger.info("Creating new room: "+name);
         ChatRoom newRoom = crs.createRoom(name);
-        //newRoom.join();
         String uri = "redirect:/chat/"+name;
         return uri;
     }

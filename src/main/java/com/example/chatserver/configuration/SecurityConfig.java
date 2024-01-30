@@ -28,7 +28,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests(authRequest ->{
             authRequest.requestMatchers("/chat/**","/createroom", "/joinroom", "/messageIn/**","/broadcast/**").authenticated();
-            authRequest.requestMatchers("/webjars/**","/static/**").authenticated();
+            authRequest.requestMatchers("/webjars/**").authenticated();
             authRequest.requestMatchers("/","/index","/register","/login").permitAll();
                 })
                 .formLogin(form ->
