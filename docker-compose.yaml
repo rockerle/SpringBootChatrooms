@@ -4,7 +4,7 @@ services:
   
   mongodb:
     container_name: 'mongodb'
-    image: 'mongo:latest'
+    image: 'mongo:6.0.13'
     environment:
       - 'MONGO_INITDB_ROOT_USERNAME=root'
       - 'MONGO_INITDB_ROOT_PASSWORD=rootpassword'
@@ -13,7 +13,7 @@ services:
       
   sb-chatrooms:
     container_name: 'chatrooms'
-    image: 'rockerle/springbootchatrooms:latest'
+    image: 'rockerle/springbootchatrooms:1.4'
     environment:
       - 'MONGODB_USER=root'
       - 'MONGODB_PASSWORD=rootpassword'
