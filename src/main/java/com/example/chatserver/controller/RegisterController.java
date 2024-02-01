@@ -2,7 +2,6 @@ package com.example.chatserver.controller;
 
 import com.example.chatserver.dto.MongoUser;
 import com.example.chatserver.service.AuthUserDetailsService;
-import com.example.chatserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,14 +15,12 @@ import java.util.logging.Logger;
 @Controller
 public class RegisterController {
 
-    AuthUserDetailsService auds;
-    UserService us;
+    private final AuthUserDetailsService auds;
     private final Logger logger = Logger.getLogger("RC-LOGGER");
 
     @Autowired
-    public RegisterController(AuthUserDetailsService auds, UserService us){
+    public RegisterController(AuthUserDetailsService auds){
         this.auds = auds;
-        this.us = us;
     }
     @GetMapping("/register")
     public String showForm(Model model){
@@ -36,8 +33,13 @@ public class RegisterController {
     public String registerUser(@ModelAttribute("user") MongoUser user){
         this.logger.info("registered user "+user.toString());
         user.setRoles(List.of("USER"));
-        if(us.addUser(user))
+        if(auds.addUser(user))
             return "index";
         else return "regFailed";
+    }
+
+    @GetMapping("/")
+    public String home(){
+        return "index";
     }
 }

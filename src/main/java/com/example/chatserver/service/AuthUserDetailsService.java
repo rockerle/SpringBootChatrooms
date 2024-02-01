@@ -16,14 +16,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.logging.Logger;
+
 @Service
 public class AuthUserDetailsService implements UserDetailsService, UserDetailsPasswordService {
 
-    IUserRepository userRepository;
+    private final Logger logger = Logger.getLogger("AUDS");
+    private final IUserRepository userRepository;
+    private final PasswordEncoder pwEncoder;
 
     @Autowired
-    public AuthUserDetailsService(IUserRepository repo){
+    public AuthUserDetailsService(IUserRepository repo, PasswordEncoder pwEncoder){
         this.userRepository = repo;
+        this.pwEncoder=pwEncoder;
     }
     @Override
     public UserDetails updatePassword(UserDetails user, String newPassword) {
@@ -39,5 +45,22 @@ public class AuthUserDetailsService implements UserDetailsService, UserDetailsPa
         if(user==null)
             throw new UsernameNotFoundException("User not found");
         return new AuthUser(user);
+    }
+
+    public boolean addUser(MongoUser newUser){
+        MongoUser u = userRepository.findByUsername(newUser.getUsername());
+        if(u==null){
+            u = new MongoUser();
+            u.setId(String.valueOf(userRepository.findAll().size()));
+            u.setUsername(newUser.getUsername());
+            u.setPassword(pwEncoder.encode(newUser.getPassword()));
+            u.setRoles(List.of("USER"));
+            u = userRepository.save(u);
+            this.logger.info("added user to db: "+u.toString());
+            return true;
+        }else{
+            this.logger.info("User already exists with the same name");
+        }
+        return false;
     }
 }

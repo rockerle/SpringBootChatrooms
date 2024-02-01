@@ -33,7 +33,7 @@ public class ChatControler {
 
     @MessageMapping("/messageIn/{name}")
     @SendTo("/broadcast/{name}")
-    public ChatMessage send(@DestinationVariable String name/*, @DestinationVariable String room*/, Authentication auth, String message) {
+    public ChatMessage send(@DestinationVariable String name, Authentication auth, String message) {
         this.logger.info("received message from ChatRoom[" + name + "] by user "+auth.getName());
         ChatRoom cr = this.crs.getChatRoom(name);
         ChatMessage msg = new ChatMessage();
