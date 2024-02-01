@@ -4,10 +4,10 @@ This is a little totaly barebone example project for a cloud computing college c
 
 This App is using a MongoDB Container to save the registered users.
 
-Just use the docker-compose file from this repository to locally build the Chatserver and MongoDB containers.
+Just use the docker-compose file from this reposi
+tory to locally build the Chatserver and MongoDB containers
 
-![sbChatrooms](https://github.com/rockerle/SpringBootChatrooms/assets/16375280/c5dde6aa-e5bc-4f49-ad41-d918dbc21221)
-
+![sbChatrooms](https://github.com/rockerle/SpringBootChatrooms/assets/16375280/2c076656-632b-4ca6-a2fe-cad6619c1461)
 ![grafik](https://github.com/rockerle/SpringBootChatrooms/assets/16375280/637d462c-c317-48ef-955d-434766d8a8ae)
 ![grafik](https://github.com/rockerle/SpringBootChatrooms/assets/16375280/3b3e2bb4-a09f-4696-858b-7780cabc17a5)
 ![grafik](https://github.com/rockerle/SpringBootChatrooms/assets/16375280/18d975a3-c383-4c84-b517-0f51301a2581)
